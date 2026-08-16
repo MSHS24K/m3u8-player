@@ -1,0 +1,41 @@
+<script src="https://cdn.jwplayer.com/libraries/SciNHiTD.js" type="text/javascript"></script>
+
+<div style="width: 100%; max-width: 800px; margin: 20px auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; box-sizing: border-box; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+  <input type="text" id="video-url-input" placeholder="এখানে ভিডিও লিংক (URL) পেস্ট করলেই অটোমেটিক প্লে হবে..." 
+         style="width: 100%; height: 50px; padding: 0 15px; border: 2px solid #007bff; border-radius: 8px; box-sizing: border-box; font-size: 15px; outline: none; color: #333;">
+</div>
+
+<div id="video-html-element-id-1" style="max-width: 800px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"></div>
+
+<script async="">
+  // ১. আপনার দেওয়া মূল কোডটি প্রথমে স্বাভাবিকভাবে লোড হবে
+  var playerInstance = jwplayer('video-html-element-id-1').setup({
+    'playlist': [{
+      'file': '#', 
+      'mediaid': 'NaMt7pLL',
+      'type': 'application/x-mpegURL',
+      'image': 'https://i.imgur.com/9gImDY5.png',
+      'adServerTarget': 'ex.sections/23436;url=2020-10-28-Qual-e-a-estrategia-portuguesa-para-a-descarbonizacao-'
+    }],
+    'width': '100%',
+    'aspectratio': '16:9'
+  });
+
+  // ২. নতুন অটোমেটিক প্লে লজিক (বাটন ছাড়া)
+  document.getElementById('video-url-input').addEventListener('input', function() {
+    var userUrl = this.value.trim();
+    
+    // লিংকটি যদি কমপক্ষে ১০ অক্ষরের বড় হয় (একটি সাধারণ লিংকের ন্যূনতম দৈর্ঘ্য)
+    if (userUrl.length > 10) {
+      playerInstance.load([{
+        'file': userUrl,
+        'mediaid': 'NaMt7pLL',
+        'type': 'application/x-mpegURL', 
+        'image': 'https://i.imgur.com/9gImDY5.png',
+        'adServerTarget': 'ex.sections/23436;url=2020-10-28-Qual-e-a-estrategia-portuguesa-para-a-descarbonizacao-'
+      }]);
+      
+      playerInstance.play();
+    }
+  });
+</script>
